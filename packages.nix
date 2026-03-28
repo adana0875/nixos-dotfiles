@@ -6,11 +6,13 @@
     # necessary general
     git
     vim
+    neovim
     wget
     lm_sensors
 
     # preference
     brave
     ghostty
+    vscodium
   ];
 }
