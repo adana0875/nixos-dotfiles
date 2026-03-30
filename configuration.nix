@@ -10,6 +10,8 @@
       /etc/nixos/hardware-configuration.nix
     ];
 
+
+
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -19,6 +21,14 @@
   boot.loader.limine = {
     enable = true;
     secureBoot.enable = true;
+    extraEntries = ''
+      /Windows 11
+      {
+        protocol: efi
+        path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+        comment: Boot into Windows 11
+      }
+    '';
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -56,6 +66,16 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
+
+  # allow dark mode
+  programs.dconf.profiles.user.databases = [
+    {
+      lockAll = true; # no overwriting
+      settings = {
+        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+      };
+    }
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -138,6 +158,27 @@
   open = false;
   nvidiaSettings = true;
   package = config.boot.kernelPackages.nvidiaPackages.latest;
+  };
+
+  # Stylix
+  stylix.enable = true;
+  stylix.base16Scheme = "/home/andrew/git/dotfiles/nixos-theme.yaml";
+  stylix.image = builtins.path {
+    path = /home/andrew/Pictures/wallpapers/snowmountain.jpeg;
+    name = "snowmountain.jpeg";
+  };
+
+  stylix.cursor = {
+    package = pkgs.bibata-cursors;  # whatever cursor package you want
+    name = "Bibata-Modern-Classic";     # the theme name within that package
+    size = 24;
+  };
+
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
   };
 
 }
