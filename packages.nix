@@ -6,15 +6,25 @@
     # necessary general
     git
     vim
-    neovim
     wget
     lm_sensors
+    tree
 
+    #============DEVELOPMENT PKGS==============
+    # for podman
+    podman-tui
+    podman-compose
+    go
+    neovim
+
+    #==============APPLICATIONS=================
     # preference
     brave
     ghostty
-    vscodium
     starship
+
+    # my applications
+    spotify
     
     # gnome extension
     gnomeExtensions.dash-to-dock

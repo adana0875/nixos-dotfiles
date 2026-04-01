@@ -1,8 +1,36 @@
 { config, pkgs, ...}:
 
+let
+  dotfiles = "${config.home.homeDirectory}/git/dotfiles";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+
+  neuwaita_path = pkgs.stdenv.mkDerivation {
+    name = "Neuwaita";
+    src = builtins.fetchGit { 
+      url = "https://github.com/RusticBard/Neuwaita.git"; 
+    };
+
+    nativeBuildInputs = [ pkgs.gtk3 ];
+
+    installPhase = ''
+      mkdir -p $out/share/icons
+      mkdir -p $out/share/icons/Neuwaita
+      rm -rf Extras
+      rm -rf img
+      cp -r * $out/share/icons/Neuwaita
+      ls $out/share/icons/Neuwaita
+      gtk-update-icon-cache --force $out/share/icons/Neuwaita
+    '';
+  };
+in
+
 {
-  home.username = "andrew";
-  home.homeDirectory = "/home/andrew";
+  home = {
+    username = "andrew";
+    homeDirectory = "/home/andrew";
+    packages = [ ];
+  };
+
   programs.git.enable = true;
   home.stateVersion = "25.11";
   programs.bash = {
@@ -10,5 +38,19 @@
     shellAliases = {
       btw = "echo Home Manager working";
     };
+  };
+
+  xdg.configFile."ghostty" = {
+    source = create_symlink "${dotfiles}/ghostty/";
+    recursive = true;
+  };
+  xdg.configFile."VSCodium" = {
+    source = create_symlink "${dotfiles}/vscode/";
+    recursive = true;
+  };
+
+  gtk.iconTheme = {
+    name = "Neuwaita";
+    package = neuwaita_path;
   };
 }
