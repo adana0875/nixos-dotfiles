@@ -142,12 +142,12 @@
   };
 
   hardware.nvidia = {
-  modesetting.enable = true;
-  powerManagement.enable = false;
-  powerManagement.finegrained = false;
-  open = false;
-  nvidiaSettings = true;
-  package = config.boot.kernelPackages.nvidiaPackages.latest;
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   # Stylix
@@ -166,7 +166,7 @@
     polarity = "dark";
   };
 
-
+  # cleaning up old generations
   nix.gc = {
     automatic = true;
     dates = "weekly";

@@ -9,24 +9,30 @@
     wget
     lm_sensors
     tree
-
+    
     #============DEVELOPMENT PKGS==============
     # for podman
     podman-tui
     podman-compose
-    go
     neovim
+    gnumake
+    gcc
+    postgresql
+
+    #  project specific
+    go
+    nodePackages.npm
 
     #==============APPLICATIONS=================
     # preference
     brave
     ghostty
-    starship
 
-    # my applications
-    spotify
+    # my apps
+    discord
     
     # gnome extension
+    gnome-tweaks
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
   ];

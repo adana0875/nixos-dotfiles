@@ -7,6 +7,7 @@
                 "golang.go"
                 "jnoortheen.nix-ide"
                 "teabyii.ayu"
+                "mvllow.rose-pine"
                 "thang-nm.flow-icons"
             ];
         })
