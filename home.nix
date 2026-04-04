@@ -29,6 +29,7 @@ in
 
   imports = [
     inputs.spicetify-nix.homeManagerModules.default  # <-- this must be here
+    # ./starship.nix
   ];
   home = {
     username = "andrew";
@@ -40,9 +41,7 @@ in
   home.stateVersion = "25.11";
   programs.bash = {
     enable = true;
-    shellAliases = {
-      btw = "echo Home Manager working";
-    };
+    initExtra = "eval \"$(starship init bash)\"";
   };
 
   xdg.configFile."ghostty" = {
@@ -53,6 +52,13 @@ in
     source = create_symlink "${dotfiles}/vscode/";
     recursive = true;
   };
+
+  xdg.configFile."MangoHud" = {
+    source = create_symlink "${dotfiles}/MangoHud/";
+    recursive = true;
+  };
+
+  xdg.configFile."starship.toml".source = create_symlink "${dotfiles}/starship.toml";
 
 
   gtk.iconTheme = {
@@ -68,10 +74,5 @@ in
       hidePodcasts
       shuffle # shuffle+ (special characters are sanitized out of extension names)
     ];
-  };
-
-  # xdg.configFile."starship.toml".source = create_symlink "${dotfiles}/starship.toml";
-  programs.starship = {
-    enable = true;
   };
 }

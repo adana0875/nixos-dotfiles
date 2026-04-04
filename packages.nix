@@ -15,13 +15,17 @@
     podman-tui
     podman-compose
     neovim
-    gnumake
     gcc
     postgresql
+    starship
 
     #  project specific
     go
     nodePackages.npm
+
+    # make cmds
+    gnumake
+    just #trying out just
 
     #==============APPLICATIONS=================
     # preference
